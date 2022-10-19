@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/jahend412/myMovie-client/issues"
   },
-  "homepage": "https://github.com/jahend412/myMovie-client#readme"
+  "homepage": "https://github.com/jahend412/myMovie-client#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }
