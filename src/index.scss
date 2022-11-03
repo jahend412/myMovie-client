@@ -1,5 +1,35 @@
-$color: steelblue;
+$color: rgb(7, 126, 67);
+
+:root {
+  background-color: rgb(196, 219, 95);
+}
 
 .main-view {
-  color: $color;
+  color: blue;
+}
+
+.movie-card {
+  background-color: aqua;
+  cursor: pointer;
+}
+
+.movie-view {
+  background-color: aqua;
+}
+
+.login-view {
+  background-color: red;
+  display: grid;
+}
+
+form {
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+}
+
+form label {
+  padding: .5em;
 }

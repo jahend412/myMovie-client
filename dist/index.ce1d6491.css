@@ -1,5 +1,35 @@
+:root {
+  background-color: #c4db5f;
+}
+
 .main-view {
-  color: #4682b4;
+  color: #00f;
+}
+
+.movie-card {
+  cursor: pointer;
+  background-color: #0ff;
+}
+
+.movie-view {
+  background-color: #0ff;
+}
+
+.login-view {
+  background-color: red;
+  display: grid;
+}
+
+form {
+  background-color: #faebd7;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  display: flex;
+}
+
+form label {
+  padding: .5em;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */
