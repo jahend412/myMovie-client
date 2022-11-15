@@ -1,37 +1,41 @@
-$color: (
-  yellow
-);
+
+
+
+
+
 
 :root {
-  background-color: (tan);
+  background-color: tan;
 }
 
 .main-view {
-  color: blue;
+  color: #00f;
 }
 
 .movie-card {
-  background-color: blue;
   cursor: pointer;
+  background-color: #00f;
 }
 
 .movie-view {
-  background-color: blue;
+  background-color: #00f;
 }
 
 .login-view {
-  background-color: blue;
+  background-color: #00f;
   display: grid;
 }
 
 form {
-  background-color: rgb(63, 52, 37);
-  display: flex;
+  background-color: #3f3425;
   flex-direction: column;
   align-items: center;
   padding: 1em;
+  display: flex;
 }
 
 form label {
   padding: .5em;
 }
+
+/*# sourceMappingURL=index.3bb28fe2.css.map */

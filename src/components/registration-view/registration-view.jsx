@@ -1,45 +1,52 @@
-<<<<<<< Updated upstream
-=======
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
-
+import { Link } from "react-router-dom"
 import './registration-view.scss';
-import e from 'express';
 
 export function RegistrationView(props) {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
 
-  const [usernameErr, setUsernameErr] = useState("");
-  const [passwordErr, setPasswordErr] = useState("");
-  const [emailErr, setEmailErr] = useState("");
+  const [values, setValues] = useState({
+    nameErr: '',
+    usernameErr: '',
+    passwordErr: '',
+    emailErr: '',
+  });
 
   //Validation
   const validate = () => {
     let isReq = true;
     if (!username) {
-      setUsernameErr("Username Required");
+      setValues({ ...values, usernameErr: "Username Required" });
       isReq = false;
-    } else if (username.length < 2) {
-      setUsernameErr("Username must have at least 2 characters");
+    } else if (username.length < 5) {
+      setValues({
+        ...values,
+        usernameErr: "Username must be 5 characters long",
+      });
       isReq = false;
     }
     if (!password) {
-      setPasswordErr("Password Required");
+      setValues({ ...values, passwordErr: "Password Required" });
       isReq = false;
     } else if (password.length < 6) {
-      setPasswordErr("Password must have at least 6 characters");
+      setValues({
+        ...values,
+        passwordErr: "Password must be 6 characters long",
+      });
       isReq = false;
     }
     if (!email) {
-      setEmailErr("Email Required");
+      setValues({ ...values, emailErr: "Email Required" });
       isReq = false;
     } else if (email.indexOf("@") === -1) {
-      setEmailErr("Please enter correct email address");
+      setValues({ ...values, emailErr: "Email is invalid" });
       isReq = false;
     }
     return isReq;
@@ -47,31 +54,33 @@ export function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.Registration(username);
+    const isReq = validate()
+    if (isReq) {
+      axios.post("https://mymoviedb-44.herokuapp.com/users", {
+        username: username,
+        password: password,
+        Email: email,
+        Birthday: birthday,
+      })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          alert('Registration successful, please login!')
+          window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
+        })
+        .catch(response => {
+          console.log("response");
+          alert('unable to register');
+        });
+    }
   };
 
-  axios.post("https://mymoviedb-44.herokuapp.com/users", {
-    username: username,
-    password: password,
-    Email: email,
-    Birthday: birthday,
-  })
-    .then((response) => {
-      const data = response.data;
-      console.log(data);
-      alert('Registration successful, please login!')
-      window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
-    })
-    .catch((e) => {
-      console.log("error registering the user");
-      alert('unable to register');
-    });
+
 
   return (
     <Container style={{ width: 400 }}>
-      <Row>
-        <Col>
+      <Row className="mt-5">
+        <Col md={12}>
           <CardGroup>
             <Card
               style={{ marginTop: 50, marginBotton: 50 }}
@@ -79,49 +88,67 @@ export function RegistrationView(props) {
               <Card.Body>
                 <Card.Title>Please Register</Card.Title>
                 <Form>
-                  <Form.Group controlId="formUsername">
+                  <h3>Sign Up</h3>
+                  <p></p>
+                  <Form.Group controlId="formUsername" className="reg-form-inputs">
                     <Form.Label> Username:</Form.Label>
                     <Form.Control
                       type="text"
-                      value={username}
-                      onChange={e => setUsername(e.target.value)}
-                      required
-                      placeholder="Enter a username"
-                    />
+                      value={username} onChange={e =>
+                        setUsername(e.target.value)} />
+                    {values.usernameErr &&
+                      <p>{values.usernameErr}</p>
+                    }
                   </Form.Group>
 
-                  <Form.Group controlId="formPassword">
+                  <Form.Group
+                    controlId="formName"
+                    className="reg-form-inputs">
+                    <Form.Label>Name:</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={name}
+                      onChange={e => setName(e.target.value)} />
+                  </Form.Group>
+
+                  <Form.Group
+                    controlId="formPassword"
+                    className="reg-form-inputs">
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
                       type="password"
                       value={password}
-                      onChange={e => setPassword(e.target.value)}
-                      required
-                      placeholder="Your Password must have 5 or more characters"
-                      minLength="5"
-                    />
+                      onChange={e =>
+                        setPassword(e.target.value)} />
+                    {values.passwordErr &&
+                      <p>{values.passwordErr}</p>
+                    }
+
                   </Form.Group>
 
-                  <Form.Group controlId="formEmail">
-                    <Form.Label>Email: </Form.Label>
+                  <Form.Group
+                    controlId="formEmail"
+                    className="reg-form-inputs">
+                    <Form.Label>Email:</Form.Label>
                     <Form.Control
                       type="email"
                       value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      required
-                      placeholder="Enter your email address"
-                    />
+                      onChange={e => setEmail(e.target.value)} />
+                    {values.emailErr &&
+                      <p>{values.emailErr}</p>
+                    }
                   </Form.Group>
 
-                  <Form.Group controlId="formBirthday">
-                    <Form.Label> Birthday: </Form.Label>
+                  <Form.Group controlId="upodateBirthday">
+                    <Form.Label>Birthday:</Form.Label>
                     <Form.Control
-                      type="birthday"
+                      type="date"
                       value={birthday}
                       onChange={(e) => setBirthday(e.target.value)}
                       required
                       placeholder="DD-MM-YYYY"
-                    />
+                    ></Form.Control>
+
                   </Form.Group>
 
                   <Button
@@ -133,10 +160,9 @@ export function RegistrationView(props) {
 
                   <Button
                     type="button"
-                    onClick={() => { props.onBackClick(null); }}>
-                    Return to Login
-                  </Button>
-
+                    onClick={() => { props.onBackClick(null); }}>Submit</Button>
+                  <p></p>
+                  <p>Already registered <Link to={'/'}>Sign in</Link> here</p>
                 </Form>
               </Card.Body>
             </Card>
@@ -157,4 +183,4 @@ RegistrationView.propTypes = {
     birthday: PropTypes.string,
   }),
 };
->>>>>>> Stashed changes
+
