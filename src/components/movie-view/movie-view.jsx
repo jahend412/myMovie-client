@@ -33,7 +33,7 @@ export class MovieView extends React.Component {
 
     return (
       <div className="movie-view">
-        <div className="movie-poster">
+        <div className="movie-poster d-flex justify-content-center mb-3">
           <img src={movie.ImagePath} />
         </div>
 
@@ -52,12 +52,18 @@ export class MovieView extends React.Component {
           <span className="value">{movie.Description}</span>
         </div>
 
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
+        <Link to={`/genres/${movie.Genre.Name}`}>
+          <Button variant='link'>Genre</Button>
+        </Link>
+        <Link to={`/directors/${movie.Director.Name}`}>
+          <Button variant='link'>Director</Button>
+        </Link>
 
-        <button onClick={() => { onBackClick(null); }}>Back</button>
+        <Button variant='success' onClick={(e) => this.addMovieToFavorites(e)}>
+          Add to favorites
+        </Button>
+
+        <Button onClick={() => { onBackClick(); }}>Back</Button>
 
       </div>
     );

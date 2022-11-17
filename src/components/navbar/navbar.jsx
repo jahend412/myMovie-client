@@ -1,6 +1,8 @@
 import React from 'react';
 import { Navbar, Container, Nav, Button, } from 'react-bootstrap';
-export function Menubar({ user }) {
+import { Link } from "react-router-dom";
+
+export function Menu({ user }) {
   const onLoggedOut = () => {
     localStorage.clear();
     window.open("/", "_self");

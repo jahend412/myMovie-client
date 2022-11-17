@@ -7,29 +7,29 @@
 
 
 :root {
-  background-color: tan;
+  background-color: #d3d3d3;
 }
 
 .main-view {
-  color: #00f;
+  color: tan;
 }
 
 .movie-card {
   cursor: pointer;
-  background-color: #00f;
+  background-color: tan;
 }
 
 .movie-view {
-  background-color: #00f;
+  background-color: tan;
 }
 
 .login-view {
-  background-color: #00f;
+  background-color: tan;
   display: grid;
 }
 
 form {
-  background-color: #3f3425;
+  background-color: #686464;
   flex-direction: column;
   align-items: center;
   padding: 1em;

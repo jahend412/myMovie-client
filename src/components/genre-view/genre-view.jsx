@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Card, CardGroup, Container, Col, Row, } from "react-bootstrap";
+import { Button, Container, Col, Row, } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 
 export class GenreView extends React.Component {
