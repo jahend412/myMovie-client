@@ -1,63 +1,102 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 
-export function LoginView(props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+
+export default function LoginView(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  // declare a hook for each input
+  const [usernameErr, setUsernameErr] = useState("");
+  const [passwordErr, setPasswordErr] = useState("");
+
+  //validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr("Username Required");
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr("Username must have at least 2 characters");
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr("Password Required");
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr("Password must have at least 6 characters");
+      isReq = false;
+    }
+    return isReq;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('https://mymoviedb-44.herokuapp.com/login', {
-      Username: username,
-      Password: password
-    })
-      .then(response => {
-        const data = response.data;
-        props.onLoggedIn(data);
+    const isReq = validate();
+    if (isReq) {
+      axios.post('https://mymoviedb-44.herokuapp.com/login', {
+        Username: username,
+        Password: password,
       })
-      .catch(e => {
-        console.log('no such user')
-      });
+        .then((response) => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch((e) => {
+          console.log(e, "no such user");
+        });
+    }
   };
 
+
   return (
-    <Container>
-      <Row>
+    <Container className="login-view">
+      <Row className="justify-content-center m-2">
         <Col>
           <CardGroup>
-            <Card style={{ marginTop: 100, marginBottom: 50, width: '30' }}>
-              <Card.Title>Login Please!</Card.Title>
+            <Card
+              style={{ marginTop: 50, marginBotton: 50 }}
+              className="login"
+            >
               <Card.Body>
-                <Form>
-                  <Form.Group
-                    controlId="formUsername">
+                <Card.Title style={{ textAlign: "center", fontSize: "2rem" }}>
+                  Login Please!
+                </Card.Title>
+                <Form className="login-form">
+                  <Form.Group controlId="formUsername">
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
                       type="text"
-                      onChange={e => setUsername(e.target.value)}
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                       required
-                      placeholder="Enter your Username"
+                      placeholder="Enter a username"
                     />
+                    {usernameErr && <p>{usernameErr}</p>}
                   </Form.Group>
 
                   <Form.Group controlId="formPassword">
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
                       type="password"
-                      onChange={e => setPassword(e.target.value)}
-                      minLength="8"
-                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      placeholder="Enter a password"
                     />
+                    {passwordErr && <p>{passwordErr}</p>}
                   </Form.Group>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
+                  <Form.Group className="mt-2">
+                    <Button variant="info" type="submit" onClick={handleSubmit}>
+                      Submit
+                    </Button>
+                    <Link to="/register" className="ml-2 registerLink">
+                      Register
+                    </Link>
+                  </Form.Group>
                 </Form>
               </Card.Body>
             </Card>

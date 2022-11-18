@@ -6,14 +6,13 @@ import { Link } from "react-router-dom"
 import './registration-view.scss';
 
 export function RegistrationView(props) {
-  const [name, setName] = useState("");
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
 
   const [values, setValues] = useState({
-    nameErr: '',
     usernameErr: '',
     passwordErr: '',
     emailErr: '',
@@ -27,8 +26,7 @@ export function RegistrationView(props) {
       isReq = false;
     } else if (username.length < 5) {
       setValues({
-        ...values,
-        usernameErr: "Username must be 5 characters long",
+        ...values, usernameErr: "Username must be 5 characters long",
       });
       isReq = false;
     }
@@ -37,8 +35,7 @@ export function RegistrationView(props) {
       isReq = false;
     } else if (password.length < 6) {
       setValues({
-        ...values,
-        passwordErr: "Password must be 6 characters long",
+        ...values, passwordErr: "Password must be 6 characters long",
       });
       isReq = false;
     }
@@ -54,7 +51,7 @@ export function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isReq = validate()
+    const isReq = validate();
     if (isReq) {
       axios.post("https://mymoviedb-44.herokuapp.com/users", {
         username: username,
@@ -69,7 +66,7 @@ export function RegistrationView(props) {
           window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
         })
         .catch(response => {
-          console.log("response");
+          console.error("response");
           alert('unable to register');
         });
     }
@@ -90,25 +87,20 @@ export function RegistrationView(props) {
                 <Form>
                   <h3>Sign Up</h3>
                   <p></p>
-                  <Form.Group controlId="formUsername" className="reg-form-inputs">
+                  <Form.Group
+                    controlId="formUsername"
+                    className="reg-form-inputs">
                     <Form.Label> Username:</Form.Label>
                     <Form.Control
                       type="text"
-                      value={username} onChange={e =>
-                        setUsername(e.target.value)} />
+                      value={username}
+                      onChange={e =>
+                        setUsername(e.target.value)}
+                      placeholder="Enter your Username"
+                    />
                     {values.usernameErr &&
                       <p>{values.usernameErr}</p>
                     }
-                  </Form.Group>
-
-                  <Form.Group
-                    controlId="formName"
-                    className="reg-form-inputs">
-                    <Form.Label>Name:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={name}
-                      onChange={e => setName(e.target.value)} />
                   </Form.Group>
 
                   <Form.Group
@@ -146,7 +138,6 @@ export function RegistrationView(props) {
                       value={birthday}
                       onChange={(e) => setBirthday(e.target.value)}
                       required
-                      placeholder="DD-MM-YYYY"
                     ></Form.Control>
 
                   </Form.Group>
@@ -157,10 +148,6 @@ export function RegistrationView(props) {
                     onClick={handleSubmit}>
                     Register
                   </Button>
-
-                  <Button
-                    type="button"
-                    onClick={() => { props.onBackClick(null); }}>Submit</Button>
                   <p></p>
                   <p>Already registered <Link to={'/'}>Sign in</Link> here</p>
                 </Form>
@@ -177,10 +164,10 @@ export function RegistrationView(props) {
 
 RegistrationView.propTypes = {
   register: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    birthday: PropTypes.string,
+    Name: PropTypes.string.isRequired,
+    Username: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
   }),
 };
 

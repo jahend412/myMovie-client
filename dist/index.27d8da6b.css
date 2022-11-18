@@ -1,0 +1,45 @@
+
+
+
+
+
+
+
+
+
+
+:root {
+  background-color: #d3d3d3;
+}
+
+.main-view {
+  color: tan;
+}
+
+.movie-card {
+  cursor: pointer;
+  background-color: tan;
+}
+
+.movie-view {
+  background-color: tan;
+}
+
+.login-view {
+  background-color: tan;
+  display: grid;
+}
+
+form {
+  background-color: #686464;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  display: flex;
+}
+
+form label {
+  padding: .5em;
+}
+
+/*# sourceMappingURL=index.27d8da6b.css.map */
