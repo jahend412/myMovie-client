@@ -75,15 +75,32 @@ export function RegistrationView(props) {
 
 
   return (
-    <Container style={{ width: 400 }}>
-      <Row className="mt-5">
-        <Col md={12}>
+    <Container
+      className="registration-view"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        height: "100%"
+      }}
+    >
+      <Row className="mt-5"
+      >
+        <Col className="justify-content-center m-2">
           <CardGroup>
             <Card
-              style={{ marginTop: 50, marginBotton: 50 }}
+              style={{
+                marginTop: 100,
+                marginBotton: 100
+              }}
               className="register">
               <Card.Body>
-                <Card.Title>Please Register</Card.Title>
+                <Card.Title
+                  style={{
+                    textAlign: "center",
+                    fontSize: "2rem"
+                  }}>
+                  Please Register
+                </Card.Title>
                 <Form>
                   <h3>Sign Up</h3>
                   <p></p>
@@ -97,6 +114,7 @@ export function RegistrationView(props) {
                       onChange={e =>
                         setUsername(e.target.value)}
                       placeholder="Enter your Username"
+
                     />
                     {values.usernameErr &&
                       <p>{values.usernameErr}</p>
@@ -157,7 +175,7 @@ export function RegistrationView(props) {
 
         </Col>
       </Row>
-    </Container>
+    </Container >
 
   );
 }

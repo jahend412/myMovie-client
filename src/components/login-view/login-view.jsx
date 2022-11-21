@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 
 
-export default function LoginView(props) {
+export function LoginView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   // declare a hook for each input
@@ -16,6 +16,7 @@ export default function LoginView(props) {
   //validate user inputs
   const validate = () => {
     let isReq = true;
+
     if (!username) {
       setUsernameErr("Username Required");
       isReq = false;
@@ -35,11 +36,12 @@ export default function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    /* Send a request to the server for authentication */
     const isReq = validate();
     if (isReq) {
       axios.post('https://mymoviedb-44.herokuapp.com/login', {
-        Username: username,
-        Password: password,
+        username: username,
+        password: password,
       })
         .then((response) => {
           const data = response.data;
@@ -51,34 +53,32 @@ export default function LoginView(props) {
     }
   };
 
-
   return (
-    <Container className="login-view">
-      <Row className="justify-content-center m-2">
-        <Col>
-          <CardGroup>
-            <Card
-              style={{ marginTop: 50, marginBotton: 50 }}
-              className="login"
-            >
+    <Container
+      className="login-view" lg={4}
+    >
+      <Row>
+        <Col className="d flex justify-content-center">
+          <CardGroup className='login-signup'>
+            <Card>
               <Card.Body>
-                <Card.Title style={{ textAlign: "center", fontSize: "2rem" }}>
-                  Login Please!
-                </Card.Title>
-                <Form className="login-form">
-                  <Form.Group controlId="formUsername">
+                <Card.Title className='text-center'>Login</Card.Title>
+                <Form>
+                  <Form.Group controlId='formUsername' className='mb-3'>
                     <Form.Label>Username:</Form.Label>
+
                     <Form.Control
                       type="text"
                       value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      required
+                      onChange={(e) =>
+                        setUsername(e.target.value)}
                       placeholder="Enter a username"
+                      required
                     />
-                    {usernameErr && <p>{usernameErr}</p>}
+                    {usernameErr && <p className='alert alert-danger'>{usernameErr}</p>}
                   </Form.Group>
 
-                  <Form.Group controlId="formPassword">
+                  <Form.Group controlId="formPassword" className='mb-3'>
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
                       type="password"

@@ -1,10 +1,14 @@
 import React from 'react';
 import { Navbar, Container, Nav, Button, } from 'react-bootstrap';
 
-export function Menu({ user }) {
-  const onLoggedOut = () => {
+export function Menu() {
+  let user = localStorage.getItem("user");
+
+  const onLoggedOut = (e) => {
+    e.preventDefault();
     localStorage.clear();
     window.open("/", "_self");
+    props.onLoggedOut(user);
   };
 
   const isAuth = () => {
@@ -28,20 +32,19 @@ export function Menu({ user }) {
     >
       <Container>
         <Navbar.Brand className='navbar-logo' href='/'>
-          myMovie
+          My Movie
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='ml-auto'>
-            {isAuth() && (<Nav.Link
-              href={`/users/${user}`}>{user}</Nav.Link>
-            )}
+            {isAuth() && <Nav.Link href='/'>Movies</Nav.Link>}
+            {isAuth() && <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>}
             {isAuth() && (
               <Button variant='link' onClick={() => { this.onLoggedOut() }}>
                 Logout
               </Button>
             )}
-            {!isAuth() && <Nav.Link href='/login'>Sign-in</Nav.Link>}
+            {!isAuth() && <Nav.Link href='/'>Sign-in</Nav.Link>}
             {!isAuth() && <Nav.Link href='/register'>Sign-up</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
