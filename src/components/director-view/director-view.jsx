@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Button, Card, CardGroup, Container, Col, Row, } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
+import { connect } from 'react-redux';
 
 export class DirectorView extends React.Component {
   render() {
@@ -50,3 +51,12 @@ export class DirectorView extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    movies: state.movies,
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(DirectorView);

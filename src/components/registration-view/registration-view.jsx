@@ -6,44 +6,80 @@ import { Link } from "react-router-dom"
 import './registration-view.scss';
 
 export function RegistrationView(props) {
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
 
   const [values, setValues] = useState({
     usernameErr: '',
     passwordErr: '',
+    birthdayErr: '',
     emailErr: '',
   });
 
   //Validation
   const validate = () => {
     let isReq = true;
+    setValues((prev) => {
+      return {
+        usernameErr: '',
+        passwordErr: '',
+        birthdayErr: '',
+        emailErr: '',
+      };
+    });
+
+    //username
     if (!username) {
-      setValues({ ...values, usernameErr: "Username Required" });
-      isReq = false;
-    } else if (username.length < 5) {
-      setValues({
-        ...values, usernameErr: "Username must be 5 characters long",
+      setValues((prevValues) => {
+        return { ...prevValues, usernameErr: 'Username is required.' };
       });
       isReq = false;
+    } else if (username.length < 6) {
+      setValues((prevValues) => {
+        return {
+          ...prevValues,
+          usernameErr: 'Username must be at least 6 characters long!',
+        };
+      });
     }
+
+    //password
     if (!password) {
-      setValues({ ...values, passwordErr: "Password Required" });
+      setValues((prevValues) => {
+        return { ...prevValues, passwordErr: 'Password is required.' };
+      });
       isReq = false;
     } else if (password.length < 6) {
-      setValues({
-        ...values, passwordErr: "Password must be 6 characters long",
+      setValues((prevValues) => {
+        return {
+          ...prevValues,
+          passwordErr: 'Password must be at least 6 characters long!',
+        };
       });
       isReq = false;
     }
+
+    //email
     if (!email) {
-      setValues({ ...values, emailErr: "Email Required" });
+      setValues({
+        prevValues,
+        emailErr: 'Email is required.',
+      });
       isReq = false;
-    } else if (email.indexOf("@") === -1) {
-      setValues({ ...values, emailErr: "Email is invalid" });
+    } else if (email.indexOf('@') === -1) {
+      setValues((prevValues) => {
+        return { ...prevValues, emailErr: 'Enter a valid email address.' };
+      });
+      isReg = false;
+    }
+
+    //birthday
+    if (!birthday) {
+      setValues((prevValues) => {
+        return { ...prevValues, birthdayErr: 'Enter a valid date.' };
+      });
       isReq = false;
     }
     return isReq;
@@ -53,12 +89,13 @@ export function RegistrationView(props) {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
-      axios.post("https://mymoviedb-44.herokuapp.com/users", {
-        username: username,
-        password: password,
-        Email: email,
-        Birthday: birthday,
-      })
+      axios
+        .post("https://mymoviedb-44.herokuapp.com/users", {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday,
+        })
         .then((response) => {
           const data = response.data;
           console.log(data);
@@ -76,29 +113,25 @@ export function RegistrationView(props) {
 
   return (
     <Container
-      className="registration-view"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        height: "100%"
-      }}
+      className="py-5 h-100"
     >
-      <Row className="mt-5"
+      <Row
+        className="d-flex justify-content-center align-items-center h-100"
       >
-        <Col className="justify-content-center m-2">
+        <Col
+          className="justify-content-center m-2"
+        >
           <CardGroup>
             <Card
-              style={{
-                marginTop: 100,
-                marginBotton: 100
-              }}
-              className="register">
-              <Card.Body>
+              className="bg-dark text-white"
+              style={{ borderRadius: '20px' }}
+            >
+              <Card.Body
+                className="p-5 text-center"
+              >
                 <Card.Title
-                  style={{
-                    textAlign: "center",
-                    fontSize: "2rem"
-                  }}>
+                  className="mb-4 text-black"
+                >
                   Please Register
                 </Card.Title>
                 <Form>
@@ -106,9 +139,15 @@ export function RegistrationView(props) {
                   <p></p>
                   <Form.Group
                     controlId="formUsername"
-                    className="reg-form-inputs">
-                    <Form.Label> Username:</Form.Label>
+                    className="mb-3"
+                  >
+                    <Form.Label
+                      className="text-left"
+                    >
+                      Username:
+                    </Form.Label>
                     <Form.Control
+                      className="bg-dark text-white"
                       type="text"
                       value={username}
                       onChange={e =>
@@ -123,44 +162,55 @@ export function RegistrationView(props) {
 
                   <Form.Group
                     controlId="formPassword"
-                    className="reg-form-inputs">
+                    className="mb-3">
                     <Form.Label>Password:</Form.Label>
                     <Form.Control
+                      className="bg-dark text-white"
                       type="password"
                       value={password}
                       onChange={e =>
-                        setPassword(e.target.value)} />
-                    {values.passwordErr &&
+                        setPassword(e.target.value)}
+                      placeholder="Enter your Password"
+                    />
+                    {values.passwordErr && (
                       <p>{values.passwordErr}</p>
-                    }
+                    )}
 
                   </Form.Group>
 
                   <Form.Group
                     controlId="formEmail"
-                    className="reg-form-inputs">
+                    className="mb-3">
                     <Form.Label>Email:</Form.Label>
                     <Form.Control
+                      className="bg-dark text-white"
                       type="email"
                       value={email}
-                      onChange={e => setEmail(e.target.value)} />
-                    {values.emailErr &&
+                      onChange={e => setEmail(e.target.value)}
+                      placeholder="Enter a valid email"
+                    />
+                    {values.emailErr && (
                       <p>{values.emailErr}</p>
-                    }
+                    )}
                   </Form.Group>
 
-                  <Form.Group controlId="upodateBirthday">
+                  <Form.Group
+                    className="mb-1"
+                    controlId="formBirthday">
                     <Form.Label>Birthday:</Form.Label>
                     <Form.Control
+                      className="bg-dark text-white"
                       type="date"
                       value={birthday}
                       onChange={(e) => setBirthday(e.target.value)}
-                      required
+                      placeholder="MM/DD/YYYY"
                     ></Form.Control>
-
                   </Form.Group>
 
+                  <br></br>
+
                   <Button
+                    className="mb-5"
                     variant="primary"
                     type="submit"
                     onClick={handleSubmit}>
@@ -172,20 +222,18 @@ export function RegistrationView(props) {
               </Card.Body>
             </Card>
           </CardGroup>
-
         </Col>
       </Row>
     </Container >
-
   );
 }
 
 RegistrationView.propTypes = {
   register: PropTypes.shape({
-    Name: PropTypes.string.isRequired,
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired,
+    Birthday: PropTypes.string.isRequired,
   }),
 };
 

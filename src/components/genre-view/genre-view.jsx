@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Container, Col, Row, } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
+import { connect } from 'react-redux';
 
 export class GenreView extends React.Component {
   render() {
@@ -40,3 +41,12 @@ export class GenreView extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    movies: state.movies,
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(GenreView);

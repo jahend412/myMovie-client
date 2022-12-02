@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from 'react-redux';
 
 import "./movie-view.scss";
 
@@ -78,3 +79,12 @@ MovieView.propTypes = {
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired
 };
+
+const mapStateToProps = (state) => {
+  return {
+    movies: state.movies,
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(MovieView);
