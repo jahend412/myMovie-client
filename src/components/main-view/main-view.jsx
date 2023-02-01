@@ -105,7 +105,7 @@ export class MainView extends React.Component {
                 );
 
               // Before the movies have been loaded
-              if (movies.length === 0)
+              if (movies?.length)
                 return movies.map((m) => (
                   <Col md={3} key={m._id}>
                     <MovieCard movie={m} />
