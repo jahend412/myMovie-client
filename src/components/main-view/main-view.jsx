@@ -157,7 +157,7 @@ export class MainView extends React.Component {
               </Col>
 
 
-              if (movies.length === 0) return <div className="main-view" />;
+              if (movies?.length) return <div className="main-view" />;
               return (
                 <Col md={8}>
                   <DirectorView
@@ -185,7 +185,7 @@ export class MainView extends React.Component {
                   </Col>
                 );
 
-              if (movies.length === 0) return <div className="main-view" />;
+              if (movies?.length) return <div className="main-view" />;
               return (
                 <Col md={8}>
                   <GenreView
