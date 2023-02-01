@@ -1,16 +1,15 @@
 import React from 'react';
 import { Navbar, Container, Nav, Button, } from 'react-bootstrap';
 
-export function Menu() {
-  let user = localStorage.getItem("user");
-
-  const onLoggedOut = (e) => {
-    e.preventDefault();
+//export function for use in main-view
+export function Menu({ user }) {
+  // signout method
+  const onLoggedOut = () => {
     localStorage.clear();
-    window.open("/", "_self");
-    props.onLoggedOut(user);
+    window.open("/", "_self"); //_self opens the linked document in the same frame as it was clicked
   };
 
+  // returns a token from Local storage
   const isAuth = () => {
     if (typeof window == "undefined") {
       return false;
@@ -22,6 +21,7 @@ export function Menu() {
     }
   };
 
+  // unordered list begins
   return (
     <Navbar
       className='main-nav'
@@ -37,10 +37,12 @@ export function Menu() {
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav className='ml-auto'>
-            {isAuth() && <Nav.Link href='/'>Movies</Nav.Link>}
-            {isAuth() && <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>}
+            {isAuth() && <Nav.Link href={`/users/${user}`}> {user} </Nav.Link>}
             {isAuth() && (
-              <Button variant='link' onClick={() => { this.onLoggedOut() }}>
+              <Button
+                variant='link'
+                onClick={() => { this.onLoggedOut() }}
+              >
                 Logout
               </Button>
             )}
@@ -51,6 +53,5 @@ export function Menu() {
       </Container>
     </Navbar>
   );
-
 }
 

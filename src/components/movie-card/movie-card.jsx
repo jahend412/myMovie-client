@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from "react-bootstrap";
-import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movie } = this.props;  //movie is the name of the prop
 
     return (
       <Card>
-        <Card.Img variant="top" src={movie.ImagePath} />
+        <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous" />
         <Card.Body>
           <Card.Title> {movie.Title}</Card.Title>
           <Card.Text> {movie.Description}</Card.Text>
           <Link to={`/movies/${movie._id}`}>
-            <Button onClick={() => onMovieClick(movie)} variant="link">Open</Button>
+            <Button variant="link">Open</Button>
           </Link>
         </Card.Body>
       </Card>
@@ -22,8 +22,10 @@ export class MovieCard extends React.Component {
   }
 }
 
+
 MovieCard.propTypes = {
   movie: PropTypes.shape({
+    // shape({..}) means that its an object
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
@@ -36,14 +38,4 @@ MovieCard.propTypes = {
       Bio: PropTypes.string.isRequired,
     }),
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
 };
-
-const mapStateToProps = (state) => {
-  return {
-    movies: state.movies,
-    user: state.user
-  };
-};
-
-export default connect(mapStateToProps)(MovieCard);
