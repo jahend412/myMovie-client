@@ -57,5 +57,3 @@ export class MovieView extends React.Component {
     );
   }
 }
-
-export default connect(mapStateToProps)(MovieView);
