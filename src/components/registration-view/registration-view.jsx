@@ -90,7 +90,7 @@ export function RegistrationView(props) {
     const isReq = validate();
     if (isReq) {
       axios
-        .post("https://mymoviedb-44.herokuapp.com/users", {
+        .post("https://my-movie-api.herokuapp.com/users", {
           Username: username,
           Password: password,
           Email: email,
@@ -130,7 +130,7 @@ export function RegistrationView(props) {
                 className="p-5 text-center"
               >
                 <Card.Title
-                  className="mb-4 text-black"
+                  className="mb-4 text-white"
                 >
                   Please Register
                 </Card.Title>

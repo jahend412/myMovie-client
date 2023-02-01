@@ -30605,7 +30605,7 @@ class MainView extends (0, _reactDefault.default).Component {
     }
     //Get Movies
     getMovies(token) {
-        (0, _axiosDefault.default).get("https://mymoviedb-44.herokuapp.com/movies", {
+        (0, _axiosDefault.default).get("https://my-movie-api.herokuapp.com/movies", {
             headers: {
                 Authorization: "Bearer${token}"
             }
@@ -42881,7 +42881,7 @@ function LoginView(props) {
         const isReq = validate();
         if (isReq) {
             e.preventDefault();
-            (0, _axiosDefault.default).post("https://mymoviedb-44.herokuapp.com/login", {
+            (0, _axiosDefault.default).post("https://my-movie-api.herokuapp.com/login", {
                 Username: username,
                 Password: password
             }).then((response)=>{
@@ -43199,7 +43199,7 @@ function RegistrationView(props) {
     const handleSubmit = (e)=>{
         e.preventDefault();
         const isReq = validate();
-        if (isReq) (0, _axiosDefault.default).post("https://mymoviedb-44.herokuapp.com/users", {
+        if (isReq) (0, _axiosDefault.default).post("https://my-movie-api.herokuapp.com/users", {
             Username: username,
             Password: password,
             Email: email,
@@ -43230,7 +43230,7 @@ function RegistrationView(props) {
                             className: "p-5 text-center",
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Title, {
-                                    className: "mb-4 text-black",
+                                    className: "mb-4 text-white",
                                     children: "Please Register"
                                 }, void 0, false, {
                                     fileName: "src/components/registration-view/registration-view.jsx",
@@ -43507,7 +43507,7 @@ class MovieView extends (0, _reactDefault.default).Component {
         const username = localStorage.getItem("user");
         const token = localStorage.getItem("token");
         e.preventDefault();
-        (0, _axiosDefault.default).post(`https://mymoviedb-44.herokuapp.com/users/${username}/movies/${movie._id}`, {
+        (0, _axiosDefault.default).post(`https://my-movie-api.herokuapp.com/users/${username}/movies/${movie._id}`, {
             username: localStorage.getItem("user")
         }, {
             headers: {
