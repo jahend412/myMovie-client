@@ -21,39 +21,38 @@ export function Menu({ user }) {
     }
   };
 
-  // unordered list begins
+  //unordered list begins
   return (
     <Navbar
-      className='main-nav'
-      sticky='top'
-      bg='dark'
-      expand='lg'
-      variant='dark'
+      className="main-nav"
+      sticky="top"
+      bg="dark"
+      expand="lg"
+      variant="dark"
     >
       <Container>
-        <Navbar.Brand className='navbar-logo' href='/'>
-          My Movie
+        <Navbar.Brand className="navbar-logo" href="/">
+          myMovie Movies
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-        <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='ml-auto'>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ml-auto">
             {isAuth() && <Nav.Link href={`/users/${user}`}> {user} </Nav.Link>}
             {isAuth() && (
               <Button
-                variant='link'
+                variant="link"
                 onClick={() => {
                   this.onLoggedOut();
                 }}
               >
-                Logout
+                Log Out
               </Button>
             )}
-            {!isAuth() && <Nav.Link href='/'>Sign-in</Nav.Link>}
-            {!isAuth() && <Nav.Link href='/register'>Sign-up</Nav.Link>}
+            {!isAuth() && <Nav.Link href="/">Sign-in</Nav.Link>}
+            {!isAuth() && <Nav.Link href="/register">Sign-up</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
-

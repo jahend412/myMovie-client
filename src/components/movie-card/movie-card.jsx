@@ -11,8 +11,8 @@ export class MovieCard extends React.Component {
       <Card>
         <Card.Img variant="top" src={movie.ImagePath} crossOrigin="anonymous" />
         <Card.Body>
-          <Card.Title> {movie.Title}</Card.Title>
-          <Card.Text> {movie.Description}</Card.Text>
+          <Card.Title> {movie.Title} </Card.Title>
+          <Card.Text> {movie.Description} </Card.Text>
           <Link to={`/movies/${movie._id}`}>
             <Button variant="link">Open</Button>
           </Link>
@@ -21,7 +21,6 @@ export class MovieCard extends React.Component {
     );
   }
 }
-
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
