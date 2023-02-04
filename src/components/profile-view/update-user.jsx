@@ -1,13 +1,74 @@
-import React, { useState, useEffect } from "react";
-import {
-  Form,
-  Button,
-} from "react-bootstrap";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function UpdateUser({ handleSubmit, handleUpdate, user }) {
-  const [userName, setUserName] = useState(user.Username);
-  const [newPassword, setNewPassword] = useState("");
-  const [email, setEmail] = useState(user.Email);
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+
+export function UpdateView(props) {
+  const { user } = props;
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [values, setValues] = useState({
+    usernameErr: '',
+    passwordErr: '',
+    emailErr: '',
+  });
+
+  //  This will validate user input
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setValues({ ...values, usernameErr: 'Username required' });
+      isReq = false;
+    } else if (username.length < 2) {
+      setValues({ ...values, usernameErr: 'Username must be at least 2 characters long' });
+      isReq = false;
+    }
+    if (!password) {
+      setValues({ ...values, passwordErr: 'Password required' });
+      isReq = false;
+    } else if (password.length < 6) {
+      setValues({ ...values, passwordErr: 'Password must be at least 6 characters long' });
+      isReq = false;
+    }
+    if (!email) {
+      setValues({ ...values, emailErr: 'Email required' });
+      isReq = false;
+    } else if (email.indexOf('@') === -1) {
+      setValues({ ...values, emailErr: 'Enter valid email' });
+      isReq = false;
+    }
+    return isReq;
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const isReq = validate();
+    if (isReq) {
+      const token = localStorage.getItem('token');
+      axios.put(`https://my-movie-api.herokuapp.com/users/${user.Username}`, {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+      },
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        .then(response => {
+          console.log(response.data);
+          alert('Profile was successfully updated.');
+          window.open(`/users/${user.Username}`, '_self');
+        })
+        .catch(error => {
+          console.error(error);
+          alert('Unable to update profile.');
+        });
+    }
+  };
+
 
   return (
     <>
@@ -17,10 +78,11 @@ function UpdateUser({ handleSubmit, handleUpdate, user }) {
           <Form.Label>Username:</Form.Label>
           <Form.Control
             type="text"
-            value={userName}
+            value={username}
             name="Username"
             required
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
           />
         </Form.Group>
 
@@ -28,13 +90,14 @@ function UpdateUser({ handleSubmit, handleUpdate, user }) {
           <Form.Label>New Password:</Form.Label>
           <Form.Control
             type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
+            value={Password}
+            onChange={(e) => setPassword(e.target.value)}
             required
-            minLength="8"
-            placeholder="Your password must have 8 or more characters"
+            minLength="5"
+            placeholder="Your password must have 5 or more characters"
           />
         </Form.Group>
+
         <Form.Group>
           <Form.Label>Email:</Form.Label>
           <Form.Control
@@ -45,6 +108,17 @@ function UpdateUser({ handleSubmit, handleUpdate, user }) {
             placeholder="Enter your email address"
           />
         </Form.Group>
+
+        <Form.Group controlId="formBirthday">
+          <Form.Label>Birthday:</Form.Label>
+          <Form.Control
+            type="date"
+            value={birthday}
+            onChange={e => setBirthday(e.target.value)}
+            placeholder="DD-MM-YYYY"
+          />
+        </Form.Group>
+
         <Button
           className="mt-2"
           variant="primary"
@@ -52,9 +126,10 @@ function UpdateUser({ handleSubmit, handleUpdate, user }) {
           onClick={(e) => {
             e.preventDefault();
             handleSubmit({
-              userName,
-              newPassword,
+              username,
+              password,
               email,
+              birthday,
             });
           }}
         >
@@ -65,4 +140,4 @@ function UpdateUser({ handleSubmit, handleUpdate, user }) {
   );
 }
 
-export default UpdateUser;
+export default UpdateView;
