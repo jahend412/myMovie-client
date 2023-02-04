@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import axios from 'axios';
 
 import { Button, Col, Container, Row } from 'react-bootstrap';
@@ -44,4 +43,3 @@ export function ProfileView(props) {
   )
 }
 
-export default ProfileVew;

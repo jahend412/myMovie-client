@@ -70,74 +70,63 @@ export function UpdateView(props) {
   };
 
 
+
   return (
-    <>
-      <h2>Want to change some info?</h2>
-      <Form>
-        <Form.Group>
-          <Form.Label>Username:</Form.Label>
-          <Form.Control
-            type="text"
-            value={username}
-            name="Username"
-            required
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
-          />
-        </Form.Group>
+    <Container id="update-form" className="mt-5">
+      <Row><h4>Edit profile</h4></Row>
+      <Row>
+        <Col sm="10" md="8" lg="6">
+          <Form>
+            <Form.Group>
+              <Form.Label>Username:</Form.Label>
+              <Form.Control
+                type="text"
+                value={username}
+                required
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+              />
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>New Password:</Form.Label>
-          <Form.Control
-            type="password"
-            value={Password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength="5"
-            placeholder="Your password must have 5 or more characters"
-          />
-        </Form.Group>
+            <Form.Group>
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength="5"
+                placeholder="Your password must have 5 or more characters"
+              />
+            </Form.Group>
 
-        <Form.Group>
-          <Form.Label>Email:</Form.Label>
-          <Form.Control
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="Enter your email address"
-          />
-        </Form.Group>
+            <Form.Group>
+              <Form.Label>Email:</Form.Label>
+              <Form.Control
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="Enter your email address"
+              />
+            </Form.Group>
 
-        <Form.Group controlId="formBirthday">
-          <Form.Label>Birthday:</Form.Label>
-          <Form.Control
-            type="date"
-            value={birthday}
-            onChange={e => setBirthday(e.target.value)}
-            placeholder="DD-MM-YYYY"
-          />
-        </Form.Group>
+            <Form.Group controlId="formBirthday">
+              <Form.Label>Birthday:</Form.Label>
+              <Form.Control
+                type="date"
+                value={birthday}
+                onChange={e => setBirthday(e.target.value)}
+                placeholder="DD-MM-YYYY"
+              />
+            </Form.Group>
 
-        <Button
-          className="mt-2"
-          variant="primary"
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            handleSubmit({
-              username,
-              password,
-              email,
-              birthday,
-            });
-          }}
-        >
-          Submit
-        </Button>
-      </Form>
-    </>
-  );
+            <Form.Group controlId="formBirthday" className="mt-3">
+              <Button variant="warning" type="submit" onClick={handleSubmit}>Update profile</Button>
+            </Form.Group>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
+  )
 }
-
-export default UpdateView;
