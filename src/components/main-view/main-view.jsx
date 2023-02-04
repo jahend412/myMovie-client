@@ -22,31 +22,14 @@ export class MainView extends React.Component {
     super(); // it means call the constructor of the parent class i.e the class called after the extends keyword (React.Component)
     this.state = {
       // the MainView state is initialized
-      movies: [],
+      // movies: [],
       // selectedMovie: null,
-      user: null,
+      // user: null,
     };
   }
 
-  //Get Movies
-  getMovies(token) {
-    axios
-      .get("https://my-movie-api.herokuapp.com/movies", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        //Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   // Get Token
-  componentDidMount() {
+  /* componentDidMount() {
     let accessToken = localStorage.getItem("token");
     if (accessToken !== null) {
       this.setState({
@@ -55,62 +38,71 @@ export class MainView extends React.Component {
       this.getMovies(accessToken);
     }
   }
+*/
 
-  //Updates the 'user' property when a user logs in
+  setSelectedMovie(newSelectedMovie) {
+    this.setState({
+      selectedMovie: newSelectedMovie
+    });
+  }
+
+  onRegister(registered) {
+    this.setState([
+      registered
+    ]);
+  }
 
   onLoggedIn(authData) {
-    // the parameter authData is ised because we need to use both user and the token
-    console.log(authData);
-    this.setState({
-      user: authData.user.Username, // user's username is saved in the user state
-    });
+    /*  console.log(authData);
+      this.setState({
+        user: authData.user.Username
+      });*/
 
-    //the auth information received from the handleSubmit method is saved in the local storage
-    localStorage.setItem("token", authData.token);
-    localStorage.setItem("user", authData.user.Username);
-    this.getMovies(authData.token); // gets the movies from the Api once the user is logged in... 'this' refers to the object itself and in this case it is MainView class
+    //localStorage.setItem('token', authData.token);
+    //localStorage.setItem('user', authData.user.Username);
+    const { setUser } = this.props;
+    setUser(authData);
+    this.getMovies(authData.token);
+  }
+
+  //Get Movies
+  getMovies(token) {
+    axios
+      .get("https://my-movie-api.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(response => {
+        this.props.setMovies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   //  allows user to log out
   onLoggedOut() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    this.setState({
-      user: null,
-    });
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.props.setUser('');
   }
 
   render() {
-    const { movies, user } = this.state;
+    let { movies, user } = this.props;
 
     return (
       <Router>
         <Menu user={user} />
         <Row className="main-view justify-content-md-center">
-          <Route
-            exact
-            path="/"
-            render={() => {
-              // if there is no user tht logiview is rendered . if there is a user logged in the user details are passed as a prop to the LoginView
-              if (!user)
-                return (
-                  <Col>
-                    <LoginView
-                      onLoggedIn={(user) => this.onLoggedIn(user)}
-                    />
-                  </Col>
-                );
 
 
-              //Before the movies have been loaded
-              if (movies?.length) return <div className="main-view" />;
-              return movies.map((m) => (
-                <Col md={3} key={m._id}>
-                  <MovieCard movie={m} />
-                </Col>
-              ));
-            }}
-          />
+          <Route exact path="/" render={() => {
+            if (!user) return <Col>
+              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+            </Col>
+            if (movies.length === 0) return <div className="main-view"></div>
+
+            return <MoviesList movies={movies} />;
+          }} />
 
 
           <Route  // Register Route
@@ -118,7 +110,7 @@ export class MainView extends React.Component {
             render={() => {
               if (user) return <Redirect to="/" />;
               return (
-                <Col lg={8} md={8}>
+                <Col>
                   <RegistrationView />
                 </Col>
               );
@@ -147,7 +139,7 @@ export class MainView extends React.Component {
             }}
           />
 
-          <Route
+          <Route  //Director Route
             exact path='/director/:name'
             render={({ match, history }) => {
               if (!user)
@@ -207,6 +199,7 @@ export class MainView extends React.Component {
               return (
                 <Col>
                   <ProfileView
+                    history={history}
                     movies={movies}
                     user={user}
                     onBackClick={() => history.goBack()}
@@ -236,6 +229,25 @@ export class MainView extends React.Component {
   }
 }
 
+let mapStateToProps = props => {
+  return {
+    movies: props.movies,
+    user: props.user,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setUser: (user) => {
+      dispatch(setUser(user))
+    },
+    setMovies: (movies) => {
+      dispatch(setMovies(movies))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainView);
 
 
 

@@ -85,20 +85,19 @@ export function RegistrationView(props) {
         <Col>
           <CardGroup>
             <Card>
-              <Card.Title>Sign Up</Card.Title>
               <Card.Body>
+                <Card.Title>Sign Up</Card.Title>
                 <Form>
                   <Form.Group controlId="formUsername">
                     <Form.Label> Username: </Form.Label>
                     <Form.Control
-                      type="text"
+                      type='text'
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       required
-                      placeholder="Enter a Username"
+                      placeholder='Enter your username'
                     />
-
-                    {usernameErr && <p> {usernameErr} </p>}
+                    {usernameErr && <p>{usernameErr}</p>}
                   </Form.Group>
 
                   <Form.Group controlId="formPassword">
@@ -140,13 +139,14 @@ export function RegistrationView(props) {
                   </Form.Group>
 
                   <Button
+                    size='lg'
                     variant="primary"
                     type="submit"
                     onClick={handleSubmit}
                   >
                     Register
                   </Button>
-                  <p></p>
+
                   <p>
                     Already registered <Link to={"/"}>Sign in</Link> here
                   </p>

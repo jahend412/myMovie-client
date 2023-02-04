@@ -1,13 +1,20 @@
 import React from 'react';
-import { Navbar, Container, Nav, Button, } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import {
+  Link
+} from "react-router-dom";
+
+import { setMovies, setUser } from '../../actions/actions';
 
 //export function for use in main-view
 export function Menu({ user }) {
   // signout method
+
   const onLoggedOut = () => {
     localStorage.clear();
-    window.open("/", "_self"); //_self opens the linked document in the same frame as it was clicked
-  };
+    window.open("/", "_self");
+  }
 
   // returns a token from Local storage
   const isAuth = () => {
@@ -32,7 +39,7 @@ export function Menu({ user }) {
     >
       <Container>
         <Navbar.Brand className="navbar-logo" href="/">
-          myMovie Movies
+          My Movie
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -42,7 +49,7 @@ export function Menu({ user }) {
               <Button
                 variant="link"
                 onClick={() => {
-                  this.onLoggedOut();
+                  { onLoggedOut }
                 }}
               >
                 Log Out

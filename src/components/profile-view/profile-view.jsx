@@ -239,7 +239,7 @@ export default class ProfileView extends React.Component {
                       <Form.Control
                         type="email"
                         name="Email"
-                        placeholder="marcella@gmail.com"
+                        placeholder="yourEmail@gmail.com"
                         onChange={(e) => this.setEmail(e.target.value)}
                         required
                       />
