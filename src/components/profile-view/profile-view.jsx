@@ -42,4 +42,6 @@ export function ProfileView(props) {
       <Button className="d-block mt-5" variant="danger" onClick={handleDelete}>Delete profile</Button>
     </Container>
   )
-} 
+}
+
+export default ProfileVew;
