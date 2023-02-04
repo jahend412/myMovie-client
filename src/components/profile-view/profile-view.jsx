@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { Button, Col, Container, Row } from 'react-bootstrap';
 
-import { FavoriteMovieView } from './favorite-movie-view';
+import { FavoriteMovieView } from './favorite-movies';
 import { UpdateView } from './update-user';
 import { UserInfo } from './user-info';
 
