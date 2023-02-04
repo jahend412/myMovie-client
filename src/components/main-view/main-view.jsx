@@ -1,17 +1,23 @@
 // imports react into the file
 import React from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { setMovies, setUser } from '../../actions/actions';
+import { connect } from 'react-redux';
+
 
 import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
-import { MovieCard } from "../movie-card/movie-card";
+//import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { Menu } from "../navbar/navbar";
-import ProfileView from "../profile-view/profile-view";
+import { ProfileView } from "../profile-view/profile-view";
+import { GenreView } from '../genre-view/genre-view';
+import { DirectorView } from '../director-view/director-view';
 
 import './main-view.scss';
 
