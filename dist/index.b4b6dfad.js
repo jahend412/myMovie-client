@@ -29585,6 +29585,7 @@ var _reactRouterDom = require("react-router-dom");
 var _actions = require("../../actions/actions");
 var _reactRedux = require("react-redux");
 var _moviesList = require("../movies-list/movies-list");
+var _moviesListDefault = parcelHelpers.interopDefault(_moviesList);
 var _loginView = require("../login-view/login-view");
 var _registrationView = require("../registration-view/registration-view");
 //import { MovieCard } from "../movie-card/movie-card";
@@ -29675,7 +29676,7 @@ class MainView extends (0, _reactDefault.default).Component {
                                 if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                     className: "main-view"
                                 }, void 0, false, void 0, void 0);
-                                return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _moviesList.MoviesList), {
+                                return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _moviesListDefault.default), {
                                     movies: movies
                                 }, void 0, false, void 0, void 0);
                             }
