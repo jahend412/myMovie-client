@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { setMovies, setUser } from '../../actions/actions';
 import { connect } from 'react-redux';
 
-
+import { MoviesList } from '../movies-list/movies-list';
 import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
 //import { MovieCard } from "../movie-card/movie-card";
