@@ -4,17 +4,38 @@
 
 
 
-.container {
-  max-width: 100% !important;
+:root {
+  background-color: #d3d3d3;
 }
 
-* {
-  box-sizing: border-box;
+.main-view {
+  color: tan;
 }
 
-body {
-  background-color: #038242 !important;
-  font-family: Caveat, cursive !important;
+.movie-card {
+  cursor: pointer;
+  background-color: tan;
+}
+
+.movie-view {
+  background-color: tan;
+}
+
+.login-view {
+  background-color: tan;
+  display: grid;
+}
+
+form {
+  background-color: #686464;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  display: flex;
+}
+
+form label {
+  padding: .5em;
 }
 
 /*# sourceMappingURL=index.3bb28fe2.css.map */
