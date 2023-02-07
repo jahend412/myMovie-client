@@ -29651,10 +29651,7 @@ class MainView extends (0, _reactDefault.default).Component {
         this.props.setUser("");
     }
     render() {
-        let({
-            movies,
-            user
-        }) = this.props;
+        let { movies , user  } = this.props;
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navbar.Menu), {
@@ -29673,7 +29670,7 @@ class MainView extends (0, _reactDefault.default).Component {
                             render: ()=>{
                                 if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-                                        onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                                        onLoggedIn: (user)=>this.onLoggedIn(user)
                                     }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0);
                                 if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29710,7 +29707,7 @@ class MainView extends (0, _reactDefault.default).Component {
                             render: ({ match , history  })=>{
                                 if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-                                        onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                                        onLoggedIn: (user)=>this.onLoggedIn(user)
                                     }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0);
                                 if (movies?.length) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29736,7 +29733,7 @@ class MainView extends (0, _reactDefault.default).Component {
                             render: ({ match , history  })=>{
                                 if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-                                        onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                                        onLoggedIn: (user)=>this.onLoggedIn(user)
                                     }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0);
                                 if (movies?.length) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29760,7 +29757,7 @@ class MainView extends (0, _reactDefault.default).Component {
                             render: ({ match , history  })=>{
                                 if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-                                        onLoggedIn: (user1)=>this.onLoggedIn(user1)
+                                        onLoggedIn: (user)=>this.onLoggedIn(user)
                                     }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0);
                                 if (movies?.length) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -29839,11 +29836,11 @@ let mapStateToProps = (props)=>{
 };
 const mapDispatchToProps = (dispatch)=>{
     return {
-        setUser: (user1)=>{
-            dispatch((0, _actions.setUser)(user1));
+        setUser: (user)=>{
+            dispatch((0, _actions.setUser)(user));
         },
-        setMovies: (movies1)=>{
-            dispatch((0, _actions.setMovies)(movies1));
+        setMovies: (movies)=>{
+            dispatch((0, _actions.setMovies)(movies));
         }
     };
 };

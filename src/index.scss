@@ -1,37 +1,15 @@
-$color: (
-  blue
-);
+$primary-color: #038242;
 
-:root {
-  background-color: lightgray;
+.container {
+  max-width: 100% !important;
 }
 
-.main-view {
-  color: tan;
+* {
+  box-sizing: border-box;
 }
 
-.movie-card {
-  background-color: tan;
-  cursor: pointer;
-}
+body {
+  background-color: $primary-color !important;
+  font-family: 'Caveat', cursive !important;
 
-.movie-view {
-  background-color: tan;
-}
-
-.login-view {
-  background-color: tan;
-  display: grid;
-}
-
-form {
-  background-color: rgb(104, 100, 100);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1em;
-}
-
-form label {
-  padding: .5em;
 }
