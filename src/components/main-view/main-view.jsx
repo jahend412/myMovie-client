@@ -93,7 +93,7 @@ export class MainView extends React.Component {
   }
 
   render() {
-    let { movies, user } = this.props;
+    let({ movies, user }) = this.props;
 
     return (
       <Router>
