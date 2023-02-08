@@ -16,17 +16,7 @@ export function Menu({ user }) {
     window.open("/", "_self");
   }
 
-  // returns a token from Local storage
-  const isAuth = () => {
-    if (typeof window == "undefined") {
-      return false;
-    }
-    if (localStorage.getItem("token")) {
-      return localStorage.getItem("token");
-    } else {
-      return false;
-    }
-  };
+  const token = user.token
 
   //unordered list begins
   return (
@@ -44,8 +34,10 @@ export function Menu({ user }) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            {isAuth() && <Nav.Link href={`/users/${user}`}> {user} </Nav.Link>}
-            {isAuth() && (
+            {!!token && (
+              <Link to={`/users/${user.user.Username}`}>{user.user.Username}</Link>
+            )}
+            {!!token && (
               <Button
                 variant="link"
                 onClick={() => {
@@ -55,8 +47,9 @@ export function Menu({ user }) {
                 Log Out
               </Button>
             )}
-            {!isAuth() && <Nav.Link href="/">Sign-in</Nav.Link>}
-            {!isAuth() && <Nav.Link href="/register">Sign-up</Nav.Link>}
+            {!!token && <Nav.Link href="/">Sign-in</Nav.Link>}
+            {!!token && <Nav.Link href="/register">Sign-up</Nav.Link>}
+
           </Nav>
         </Navbar.Collapse>
       </Container>

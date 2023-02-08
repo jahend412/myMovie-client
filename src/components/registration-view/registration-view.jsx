@@ -63,18 +63,13 @@ export function RegistrationView(props) {
           Email: email,
           Birthday: birthday,
         })
-        .then((response) => {
+        .then(response => {
           const data = response.data;
           console.log(data);
-          alert('Registration successful, please login!');
-
-          window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
+          window.open('/', '_self'); // the second argument "_self" is neccessary so that the page will open in the current tab
         })
-        //.catch(response => {
-        //console.error("response");
-        // alert('unable to register');
-        .catch((e) => {
-          console.log("error registering user");
+        .catch(e => {
+          console.log('error registering the user')
         });
     }
   };
@@ -121,7 +116,7 @@ export function RegistrationView(props) {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      placeholder="marcella@gmail.com"
+                      placeholder="yourEmail@gmail.com"
                     />
 
                     {emailErr && <p> {emailErr} </p>}
@@ -161,10 +156,10 @@ export function RegistrationView(props) {
 }
 
 RegistrationView.propTypes = {
-  register: PropTypes.shape({
-    Name: PropTypes.string.isRequired,
+  user: PropTypes.shape({
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired,
+    Birthday: PropTypes.number.isRequired,
   }),
 };
