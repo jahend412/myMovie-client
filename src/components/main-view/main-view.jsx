@@ -19,16 +19,16 @@ import { ProfileView } from "../profile-view/profile-view";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { setMovies } from '../../actions/actions';
 
+
+import MoviesList from '../movies-list/movies-list';
 
 
 import './main-view.scss';
 
 
-import { setMovies } from '../../actions/actions';
 
-
-import MoviesList from '../movies-list/movies-list';
 
 
 //  export keyword removed from here

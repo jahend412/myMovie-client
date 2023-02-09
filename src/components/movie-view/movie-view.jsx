@@ -37,9 +37,9 @@ export class MovieView extends React.Component {
 
     return (
       <Row>
-        <Col lg={8}>
-          <div className="movie-view">
-            <div className="movie-poster mt-3">
+        <Col lg={11}>
+          <div className="movie-view" >
+            <div className="movie-poster mt-3" >
               <img src={movie.ImagePath} />
             </div>
             <div className="movie-title mt-2">
@@ -84,7 +84,7 @@ export class MovieView extends React.Component {
               value={movie._id}
               onClick={(e) => this.handleFavoriteMovie(e, movie)}
             >
-              Add to your favorite Movies
+              Add to your favorite movies!
             </Button>
           </div>
 

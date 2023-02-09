@@ -25,7 +25,7 @@ export function Menu({ user, onLoggedOut }) {
     <Navbar className="navbar-custom mt-4" sticky="top" bg="dark"
       expand="xl" style={{ borderRadius: '15px' }}>
       <Container>
-        <Navbar.Brand className="navbar-logo" href="/">
+        <Navbar.Brand className="navbar-logo text-white" href="/">
           My Movie
         </Navbar.Brand>
         <Navbar.Brand className="navbar-logo text-white text-center" href="/"></Navbar.Brand>

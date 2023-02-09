@@ -5,11 +5,11 @@
 
 
 :root {
-  background-color: #d3d3d3;
+  background-color: #110736;
 }
 
 .main-view {
-  color: #747474;
+  color: #000;
 }
 
 .movie-card {
@@ -18,7 +18,8 @@
 }
 
 .movie-view {
-  background-color: #000;
+  background-color: #afafaf;
+  justify-content: center;
 }
 
 .login-view {
@@ -27,7 +28,7 @@
 }
 
 form {
-  background-color: #686464;
+  background-color: #fafafa;
   flex-direction: column;
   align-items: center;
   padding: 1em;
