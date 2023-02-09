@@ -9,20 +9,20 @@
 }
 
 .main-view {
-  color: tan;
+  color: #747474;
 }
 
 .movie-card {
   cursor: pointer;
-  background-color: tan;
+  background-color: #000;
 }
 
 .movie-view {
-  background-color: tan;
+  background-color: #000;
 }
 
 .login-view {
-  background-color: tan;
+  background-color: #747474;
   display: grid;
 }
 
