@@ -52,47 +52,37 @@ export function LoginView(props) {
     console.log(username, password);
   };
 
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+    props.toRegister();
+  };
+
   return (
-    <Container>
-      <Row>
-        <Col>
+    <Container className="py-5 h-100">
+      <Row className="d-flex justify-content-center align-items-center h-100">
+        <Col className="col-12 col-md-8 col-lg-6 col-xl-5">
           <CardGroup>
-            <Card>
-              <Card.Title>Please Login</Card.Title>
-              <Card.Body>
+            <Card className="bg-dark text-white" style={{ borderRadius: '20px' }}>
+              <Card.Body className="p-5 text-center">
+                <Card.Title className="mb-4">LOGIN</Card.Title>
+                <p className="text-white-50 mb-4">Please enter your username and password!</p>
                 <Form>
-                  <Form.Group controlId="formUsername">
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      required
-                      placeholder="Enter your Username"
-                    />
-
-                    {usernameErr && <p> {usernameErr} </p>}
+                  <Form.Group className="mb-4" controlId="formUsername">
+                    <Form.Control className="bg-dark text-white" type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
+                    {/* code added here to display validation error */}
+                    {usernameErr && <p>{usernameErr}</p>}
                   </Form.Group>
 
-                  <Form.Group controlId="formPassword">
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      minLength="5"
-                      placeholder="Please enter your password"
-                    />
-
-                    {passwordErr && <p> {passwordErr} </p>}
+                  <Form.Group className="mb-4 " controlId="formPassword">
+                    <Form.Control className="bg-dark text-white" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                    {/* code added here to display validation error */}
+                    {passwordErr && <p>{passwordErr}</p>}
                   </Form.Group>
-
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Submit
+                  <Button className="mb-3 btn-lg px-5" variant="outline-primary" type="submit" onClick={handleSubmit}>
+                    Log In
+                  </Button>
+                  <Button className="register-button mt-2" variant="secondary" type="submit" onClick={handleRegisterClick}>
+                    Register
                   </Button>
                 </Form>
               </Card.Body>
