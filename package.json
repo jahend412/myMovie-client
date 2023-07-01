@@ -19,6 +19,10 @@
   "homepage": "https://github.com/jahend412/myMovie-client#readme",
   "dependencies": {
     "axios": "^1.1.3",
+<<<<<<< Updated upstream
+=======
+    "node": "^18.13.0",
+>>>>>>> Stashed changes
     "parcel": "^2.7.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -35,7 +39,10 @@
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
     "events": "^3.3.0",
+<<<<<<< Updated upstream
     "parcel-bundler": "^1.12.5",
+=======
+>>>>>>> Stashed changes
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "querystring-es3": "^0.2.1",
