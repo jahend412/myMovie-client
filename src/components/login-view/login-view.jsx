@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
-import { Link } from "react-router-dom";
-
 import axios from "axios";
 
 export function LoginView(props) {
@@ -39,7 +37,7 @@ export function LoginView(props) {
     const isReq = validate();
     if (isReq) {
       e.preventDefault();
-      axios.post('https://mymoviedb-44.herokuapp.com/login', {
+      axios.post('https://my-movie-api.herokuapp.com/login', {
         Username: username,
         Password: password
       })
@@ -54,80 +52,38 @@ export function LoginView(props) {
     console.log(username, password);
   };
 
-  return (
-    <Container
-      className="py-5 h-100"
-    >
-      <Row
-        className="d-flex justify-content-center align-items-center h-100"
-      >
-        <Col
-          className="justify-content-center m-2"
-        >
-          <CardGroup>
-            <Card
-              className="bg-dark text-white"
-              style={{ borderRadius: '20px' }}
-            >
-              <Card.Body
-                className="p-5 text-center"
-              >
-                <Card.Title
-                  className='mb-4'
-                >
-                  Login
-                </Card.Title>
-                <Form>
-                  <h3>Sign In</h3>
-                  <p></p>
-                  <Form.Group
-                    controlId='formUsername'
-                    className='mb-3'>
-                    <Form.Label
-                      className="text-left"
-                    >Username:</Form.Label>
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+    props.toRegister();
+  };
 
-                    <Form.Control
-                      className="bg dark text-white"
-                      type="text"
-                      value={username}
-                      onChange={(e) =>
-                        setUsername(e.target.value)}
-                      placeholder="Enter your Username"
-                    />
-                    {usernameErr &&
-                      <p>{values.usernameErr}</p>
-                    }
+  return (
+    <Container className="py-5 h-100">
+      <Row className="d-flex justify-content-center align-items-center h-100">
+        <Col className="col-12 col-md-8 col-lg-6 col-xl-5">
+          <CardGroup>
+            <Card className="bg-dark text-white" style={{ borderRadius: '20px' }}>
+              <Card.Body className="p-5 text-center">
+                <Card.Title className="mb-4">LOGIN</Card.Title>
+                <p className="text-white-50 mb-4">Please enter your username and password!</p>
+                <Form>
+                  <Form.Group className="mb-4" controlId="formUsername">
+                    <Form.Control className="bg-dark text-white" type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
+                    {/* code added here to display validation error */}
+                    {usernameErr && <p>{usernameErr}</p>}
                   </Form.Group>
 
-                  <Form.Group
-                    controlId="formPassword"
-                    className='mb-3'
-                  >
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control
-                      className="bg-dark text-white"
-                      type="password"
-                      value={password}
-                      onChange={(e) =>
-                        setPassword(e.target.value)}
-                      placeholder="Enter your Password"
-                    />
+                  <Form.Group className="mb-4 " controlId="formPassword">
+                    <Form.Control className="bg-dark text-white" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                    {/* code added here to display validation error */}
                     {passwordErr && <p>{passwordErr}</p>}
                   </Form.Group>
-
-                  <br></br>
-
-                  <Button
-                    className="mb-5"
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}>
-                    Log in
+                  <Button className="mb-3 btn-lg px-5" variant="outline-primary" type="submit" onClick={handleSubmit}>
+                    Log In
                   </Button>
-                  <p></p>
-                  <p>Need to Register <Link to={'/register'}>Sign up </Link> here</p>
-
+                  <Button className="register-button mt-2" variant="secondary" type="submit" onClick={handleRegisterClick}>
+                    Register
+                  </Button>
                 </Form>
               </Card.Body>
             </Card>

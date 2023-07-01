@@ -46,6 +46,44 @@ The server-side component of myMovie relies on the following dependencies:
 ##Endpoints
 The myMovie API provides the following endpoints:
 
+#### Get a list of all movies
+* GET /movies: Retrieves a list of all movies in the database.
+![image](img/get%20all%20movies.png)
+* GET /movies/[Title]: Retrieves detailed information about a specific movie based on its title.
+![image](img/get%20movie%20by%20title.png)
+
+* GET /movies/genres/[Name]: Retrieves detailed information about a genre based on its name.
+![image](img/get%20movie%20by%20genre.png)
+* GET /movies/directors/[Name]: Retrieves detailed information about a director based on their name.
+![image](img/get%20director%20by%20name.png)
+* GET /users: Retrieves a list of all users.
+![image](img/get%20user.png)
+* GET /users/[Username]: Retrieves information about a specific user based on their username.
+![image](img/get%20user%20by%20name.png)
+* POST /users: Creates a new user account.
+![image](img/post%20new%20user.png)
+
+* PUT /users/[Username]: Updates user information based on their username.
+![image](img/update%20user.png)
+
+* POST /users/[Username]/Movies/[MovieID]: Adds a movie to a user's list of favorites.
+* DELETE /users/[Username]/Movies/[MovieID]: Removes a movie from a user's list of favorites.
+* DELETE /users/[Username]: Deletes a user account based on their username.
+
+#Client-side
+
+The client-side of the myMovie application is built using React, a JavaScript library for building user interfaces. It features a single-page application architecture with state routing for navigation and URL sharing.
+
+The main views and features of the myMovie application include:
+
+* Main view: Displays a list of all movies, with options for sorting and filtering. Users can select a movie to view more details and have access to profile data and logout functionality.
+* Movie view: Provides detailed information about a specific movie, including description, genre, director, and an image. Users can add the movie to their list of favorites.
+* Login view: Allows users to log in using their username and password, with a link to the registration view for new users.
+* Registration view: Enables new users to create an account by providing their username, password, email, and birthday.
+* Genre view: Displays information about a specific genre, including its name, description, and example movies.
+* Director view: Shows information about a specific director, including their name, biography, birth year, and death year if applicable. It also displays example movies associated with the director.
+* Profile view: Allows users to view their profile.
+=======
 ### GET /movies: 
 Retrieves a list of all movies in the database.
 ![image](img/get%20all%20movies.png)
@@ -160,3 +198,4 @@ description.
 
 #### Update Profile
 * Allows users to modify their user information, ensuring their profile remains up-to-date and accurate.
+

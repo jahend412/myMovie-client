@@ -1,14 +1,13 @@
-import React from 'react';
-import { Navbar, Container, Nav, Button, } from 'react-bootstrap';
+import React from "react";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-export function Menu() {
-  let user = localStorage.getItem("user");
-
-  const onLoggedOut = (e) => {
+export function Menu({ user, onLoggedOut }) {
+  const handleLogOut = (e) => {
     e.preventDefault();
     localStorage.clear();
-    window.open("/", "_self");
-    props.onLoggedOut(user);
+    window.open('/', '_self');
+    onLoggedOut(user);
   };
 
   const isAuth = () => {
@@ -23,34 +22,33 @@ export function Menu() {
   };
 
   return (
-    <Navbar
-      className='main-nav'
-      sticky='top'
-      bg='dark'
-      expand='lg'
-      variant='dark'
-    >
+    <Navbar className="navbar-custom mt-4" sticky="top" bg="dark"
+      expand="xl" style={{ borderRadius: '15px' }}>
       <Container>
-        <Navbar.Brand className='navbar-logo' href='/'>
+        <Navbar.Brand className="navbar-logo text-white" href="/">
           My Movie
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-        <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='ml-auto'>
-            {isAuth() && <Nav.Link href='/'>Movies</Nav.Link>}
-            {isAuth() && <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>}
+        <Navbar.Brand className="navbar-logo text-white text-center" href="/"></Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="text-center ml-auto">
             {isAuth() && (
-              <Button variant='link' onClick={() => { this.onLoggedOut() }}>
-                Logout
-              </Button>
+              <Nav.Link className="text-white-50 text-center" href={`/users/${user}`}>{user}</Nav.Link>
             )}
-            {!isAuth() && <Nav.Link href='/'>Sign-in</Nav.Link>}
-            {!isAuth() && <Nav.Link href='/register'>Sign-up</Nav.Link>}
+            {isAuth() && (
+              <Button className="text-white" variant="link" onClick={handleLogOut}>Logout</Button>
+            )}
+            {!isAuth() && (
+              <Nav.Link className="text-white" href="/">Log In</Nav.Link>
+            )}
+            {!isAuth() && (
+              <Nav.Link className="text-white" href="/register">Sign Up</Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
-
 }
 
+export default Menu

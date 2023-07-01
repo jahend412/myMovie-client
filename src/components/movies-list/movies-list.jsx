@@ -7,9 +7,7 @@ import { MovieCard } from '../movie-card/movie-card';
 
 const mapStateToProps = state => {
   const { visibilityFilter } = state;
-  return (
-    { visibilityFilter }
-  );
+  return { visibilityFilter };
 };
 
 function MoviesList(props) {
@@ -20,11 +18,7 @@ function MoviesList(props) {
     filteredMovies = movies.filter(m => m.Title.toLowerCase().includes(visibilityFilter.toLowerCase()));
   }
 
-  if (!movies)
-    return (
-      <div className="main-view"
-      />
-    );
+  if (!movies) return <div className="main-view" />;
 
   return <>
     <Col md={12} style={{ margin: '1em' }}>

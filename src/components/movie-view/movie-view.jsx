@@ -1,72 +1,95 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { connect } from 'react-redux';
+import axios from 'axios';
+import { Row, Col, Button, Image } from "react-bootstrap";
 
-import "./movie-view.scss";
+import './movie-view.scss';
+
+import { Link } from "react-router-dom";
+
 
 export class MovieView extends React.Component {
-  addMovieToFavorites(e) {
+  handleFavoriteMovie(e) {
     const { movie } = this.props;
-    const username = localStorage.getItem("user");
-    const token = localStorage.getItem("token");
-
     e.preventDefault();
     axios
       .post(
-        `https://mymoviedb-44.herokuapp.com/users/${username}/movies/${movie._id}`,
+        `https://my-movie-api.herokuapp.com/users/${localStorage.getItem(
+          "user"
+        )}/Movies/${movie._id}`,
         { username: localStorage.getItem("user") },
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       )
-      .then((response) => {
-        console.log(response);
-        alert("movie added");
+      .then((res) => {
+        alert(`${movie.Title} successfully added to your favorites`);
       })
-      .catch((error) => console.error(error));
+      .then((res) => {
+        document.location.reload(true);
+      })
+      .catch((error) => {
+        alert(`${movie.Title} not added to your favorites` + error);
+      });
   }
-
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie, onBackClick, handleFavorite } = this.props;
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster d-flex justify-content-center mb-3">
-          <img src={movie.ImagePath} />
-        </div>
+      <Row>
+        <Col lg={11}>
+          <div className="movie-view" >
+            <div className="movie-poster mt-3" >
+              <img src={movie.ImagePath} />
+            </div>
+            <div className="movie-title mt-2">
+              <span className="label">Title: </span>
+              <span className="value">{movie.Title}</span>
+            </div>
+            <div className="movie-description">
+              <span className="label">Description: </span>
+              <span className="value">{movie.Description}</span>
+            </div>
+            <div className="movie-director">
+              <Link to={`/directors/${movie.Director.Name}`}>
+                <Button variant="link">Director:</Button>
+              </Link>
+              <span className="value">{movie.Director.Name}</span>
+            </div>
 
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
 
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
+            <div className="movie-genre">
+              <Link to={`/genres/${movie.Genre.Name}`}>
+                <Button variant="link">Genre:</Button>
+              </Link>
+              <span className="value">{movie.Genre.Name}</span>
+            </div>
 
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
 
-        <Link to={`/genres/${movie.Genre.Name}`}>
-          <Button variant='link'>Genre</Button>
-        </Link>
-        <Link to={`/directors/${movie.Director.Name}`}>
-          <Button variant='link'>Director</Button>
-        </Link>
 
-        <Button variant='success' onClick={(e) => this.addMovieToFavorites(e)}>
-          Add to favorites
-        </Button>
 
-        <Button onClick={() => { onBackClick(); }}>Back</Button>
 
-      </div>
+            <Button
+              className="back-button mb-3 btn-lg px-5"
+              variant="outline-secondary"
+              onClick={() => {
+                onBackClick();
+              }}
+            >
+              Back
+            </Button>
+            <Button
+              className="favorite-button mb-3 btn-lg px-5"
+              variant="outline-primary"
+              value={movie._id}
+              onClick={(e) => this.handleFavoriteMovie(e, movie)}
+            >
+              Add to your favorite movies!
+            </Button>
+          </div>
+
+        </Col>
+      </Row>
     );
   }
 }
@@ -75,16 +98,16 @@ MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired
+    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+    }).isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
+      Birth: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  onBackClick: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = (state) => {
-  return {
-    movies: state.movies,
-    user: state.user
-  };
-};
-
-export default connect(mapStateToProps)(MovieView);

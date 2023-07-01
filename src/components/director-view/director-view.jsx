@@ -1,62 +1,43 @@
 import React from "react";
-import { Form, Button, Card, CardGroup, Container, Col, Row, } from "react-bootstrap";
+import { Button, Container, Col, Row } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
-import { connect } from 'react-redux';
 
 export class DirectorView extends React.Component {
   render() {
     const { director, onBackClick, directorMovies } = this.props;
 
     return (
-      <div>
-        <Container className='director-view'>
-          <Row>
-            <Col className='label'>Director: </Col>
-            <Col className='value'>{director.Director.Name}</Col>
-          </Row>
-          <Row>
-            <Col className='label'>Bio: </Col>
-            <Col className='value'>{director.Director.Bio}</Col>
-          </Row>
-          <Row>
-            <Col className='label'>Birth: </Col>
-            <Col className='value'>{director.Director.Birth}</Col>
-          </Row>
-          {/* If statement - if death is  0 dont show else show */}
-          {director.Director.Death > 0 && (
-            <Row>
-              <Col className='label'>Death: </Col>
-              <Col className='value'>{director.Director.Death}</Col>
-            </Row>
-          )}
-          <Row>
-            <Col className='label'>Other {director.Director.Name} films: </Col>
-            <Col className='value'>
-              {directorMovies.map((movie) => (
-                <MovieCard key={movie._id} movie={movie}>
-                  {movie.Title}
-                </MovieCard>
-              ))}
+      <Container className="director-view">
+        <Row>
+          <Col>
+            <h1>{director.Name}</h1>
+            <p>Birth: {director.Birth}</p>
+            {director.Death > 0 && <p>Death: {director.Death}</p>}
+          </Col>
+        </Row>
+        <Row>
+          <Col>{director.Bio}</Col>
+        </Row>
+
+        <Row>
+          {directorMovies?.map((movie) => (
+            <Col lg={4} md={6}>
+              <MovieCard key={movie._id} movie={movie}>
+                {movie.Title}
+              </MovieCard>
             </Col>
-          </Row>
-          <Button
-            className='mt-4'
-            onClick={() => {
-              onBackClick();
-            }}>
-            Back
-          </Button>
-        </Container>
-      </div>
+          ))}
+        </Row>
+        <Button
+          className="mt-3 backBtn"
+          onClick={() => {
+            onBackClick(null);
+          }}
+          variant="secondary"
+        >
+          Go Back
+        </Button>
+      </Container>
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    movies: state.movies,
-    user: state.user
-  };
-};
-
-export default connect(mapStateToProps)(DirectorView);
