@@ -43,7 +43,7 @@ The server-side component of myMovie relies on the following dependencies:
 * passport-local
 * uuid
 
-##Endpoints
+## Endpoints
 The myMovie API provides the following endpoints:
 
 ### GET /movies: 
@@ -76,9 +76,11 @@ Updates user information based on their username.
 ### POST /users/[Username]/Movies/[MovieID]: 
 Adds a movie to a user's list of favorites.
 ![image](img/add%20favorite%20movie.png)
+
 ### DELETE /users/[Username]/Movies/[MovieID]:
 Removes a movie from a user's list of favorites.
 ![image](img/Delete%20Favorite.png)
+
 ### DELETE /users/[Username]: 
 Deletes a user account based on their username.
 ![image](img/Delete%20User.png)
